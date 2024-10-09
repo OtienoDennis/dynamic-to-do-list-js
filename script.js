@@ -23,17 +23,17 @@ function addTask ( defaultTask, save = true ) {
             li.remove();
 
             // Remove task from localStorage
-            let allTasks = JSON.parse( localStorage.getItem( 'allTasks' ) ) || [];
+            let allTasks = JSON.parse( localStorage.getItem( 'tasks' ) ) || [];
             allTasks = allTasks.filter( task => task !== taskText );
-            localStorage.setItem( 'allTasks', JSON.stringify( allTasks ) );
+            localStorage.setItem( 'tasks', JSON.stringify( allTasks ) );
         } );
 
         taskInput.value = "";
     }
     if ( save ) {
-        allTasks = JSON.parse( localStorage.getItem( 'allTasks' ) ) || [];
+        allTasks = JSON.parse( localStorage.getItem( 'tasks' ) ) || [];
         allTasks.push( taskText );
-        localStorage.setItem( 'allTasks', JSON.stringify( allTasks ) );
+        localStorage.setItem( 'tasks', JSON.stringify( allTasks ) );
     }
 }
 
@@ -45,7 +45,7 @@ taskInput.addEventListener( 'keypress', ( event ) => {
 } )
 
 function loadTasks () {
-    const listOfTasks = JSON.parse( localStorage.getItem( 'allTasks' ) ) || [];
+    const listOfTasks = JSON.parse( localStorage.getItem( 'tasks' ) ) || [];
     console.log(listOfTasks)
     listOfTasks.forEach(task => {
         addTask( task, false);
