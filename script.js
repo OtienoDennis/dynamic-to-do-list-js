@@ -14,11 +14,20 @@ function addTask ( defaultTask, save = true ) {
         let removeButton = document.createElement( 'button' );
         removeButton.textContent = 'Remove';
         removeButton.classList.add( 'remove-btn' );
-        removeButton.addEventListener( 'click', () => {
-            li.remove();
-        } )
+        
         li.appendChild( removeButton );
         taskList.appendChild( li );
+
+        removeButton.addEventListener( 'click', () => {
+            // Remove task from the list
+            li.remove();
+
+            // Remove task from localStorage
+            let allTasks = JSON.parse( localStorage.getItem( 'allTasks' ) ) || [];
+            allTasks = allTasks.filter( task => task !== taskText );
+            localStorage.setItem( 'allTasks', JSON.stringify( allTasks ) );
+        } );
+
         taskInput.value = "";
     }
     if ( save ) {
@@ -44,6 +53,3 @@ function loadTasks () {
 }
 
 document.addEventListener( "DOMContentLoaded", loadTasks);
-
-
-
